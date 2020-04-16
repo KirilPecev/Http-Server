@@ -1,5 +1,6 @@
 ﻿namespace HTTP.Headers
 {
+    using System;
     using System.Collections.Generic;
 
     public class HttpHeaderCollection : IHttpHeaderCollection
@@ -27,6 +28,11 @@
         public HttpHeader GetHeader(string key)
         {
             return this.headers[key];
+        }
+
+        public override string ToString()
+        {
+            return string.Join(Environment.NewLine, this.headers.Values);
         }
     }
 }
