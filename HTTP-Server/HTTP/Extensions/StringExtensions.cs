@@ -1,6 +1,5 @@
 ﻿namespace HTTP.Extensions
 {
-    using System;
     using System.Collections.Generic;
 
     public static class StringExtensions
@@ -15,7 +14,7 @@
                 result.Add(s[0].ToString().ToUpper() + s.Substring(1).ToLower());
             }
 
-            return String.Join(" ", result);
+            return string.Join(" ", result);
         }
     }
 }
