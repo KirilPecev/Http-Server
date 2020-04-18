@@ -81,14 +81,14 @@
 
         private void ParseHeaders(string[] content)
         {
-            if (!this.HasHost(content[0]))
+            if (!this.HasHost(content))
             {
                 throw new BadRequestException();
             }
 
             foreach (var line in content)
             {
-                if (line == Environment.NewLine)
+                if (string.IsNullOrEmpty(line))
                 {
                     return;
                 }
@@ -99,8 +99,8 @@
             }
         }
 
-        private bool HasHost(string line)
-            => line.Contains(GlobalConstants.HostHeaderKey);
+        private bool HasHost(string[] content)
+            => content.Any(line => line.Contains(GlobalConstants.HostHeaderKey));
 
         private void ParseRequestParameters(string line)
         {
@@ -126,7 +126,10 @@
 
         private void ParseFormDataParameters(string requestLine)
         {
-            this.ParseParameters(this.FormData, requestLine);
+            if (!string.IsNullOrWhiteSpace(requestLine))
+            {
+                this.ParseParameters(this.FormData, requestLine);
+            }
         }
 
         private void ParseParameters(Dictionary<string, object> dictionary, string requestLine)

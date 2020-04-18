@@ -12,6 +12,8 @@
             this.headers = new Dictionary<string, HttpHeader>();
         }
 
+        public int Count => this.headers.Count;
+
         public void Add(HttpHeader header)
         {
             if (!this.ContainsHeader(header.Key))
